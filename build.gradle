@@ -2,6 +2,7 @@ plugins{
     id 'java'
 }
 
+
 repositories {
     mavenCentral()
 }
@@ -10,6 +11,10 @@ dependencies {
     testImplementation 'com.codeborne:selenide:5.15.1'
     testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.6.2"
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 test {
