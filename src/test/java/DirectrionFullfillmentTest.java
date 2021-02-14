@@ -51,9 +51,12 @@ public class DirectrionFullfillmentTest {
 
         $(byAttribute("ng-reflect-message","A06.09.006 - Флюорография легк")).click();
 
-        $($x("//button[text()='Добавить'])")).click();
+        $(".cdk-overlay-container").click();
+        $(".btn-blue-square:not(.ng-star-inserted)").click();
 
-        $($x("//app-directions[@class='ng-star-inserted']")).click();
+        $($x("//button[text()=' Сохранить ']")).click();
+
+
     }
 
 
