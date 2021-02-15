@@ -42,8 +42,11 @@ public class TestBase {
     SelenideElement overlay = $(".cdk-overlay-container");
 
     //----Кнопки-----------------------------------------------------------------------------------------------------
-    SelenideElement add = $(".btn-blue-square:not(.ng-star-inserted)"),
-                    save = $($x("//button[text()=' Сохранить ']"));
+    SelenideElement buttonAdd = $(".btn-blue-square:not(.ng-star-inserted)"),
+                    buttonSave = $($x("//button[text()=' Сохранить ']"));
+
+    //----Кнопки-----------------------------------------------------------------------------------------------------
+    SelenideElement successMessage = $($x("//span[text()='Направление успешно сохранено']"));
 
 //-------------------------------------------------------------------------------------------------------------------
     @BeforeAll

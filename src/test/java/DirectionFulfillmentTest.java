@@ -1,3 +1,4 @@
+import com.codeborne.selenide.Condition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
+import static com.codeborne.selenide.Condition.text;
 import static io.qameta.allure.Allure.step;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
@@ -25,6 +27,11 @@ class DirectionFulfillmentTest extends TestBase {
 
         String mkabId = System.getProperty("mkaId");
         String tapId = System.getProperty("tapId");
+
+        if (mkabId == null || tapId == null ){
+            mkabId = "2662400";
+            tapId = "2670594";
+        }
 
         openURLWithMkabTap(mkabId,tapId);
 
@@ -45,8 +52,11 @@ class DirectionFulfillmentTest extends TestBase {
         researchFound.click();
 
         overlay.click();
-        add.click();
+        buttonAdd.click();
 
-        save.click();
+        buttonSave.click();
+
+        successMessage.exists();
+
     }
 }
