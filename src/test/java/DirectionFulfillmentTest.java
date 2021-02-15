@@ -23,7 +23,10 @@ class DirectionFulfillmentTest extends TestBase {
     @DisplayName("fillDirectionForm")
     void fillDirectionForm(){
 
-        openURLWithMkabTap("2662400","2670594");
+        String mkabId = System.getProperty("mkaId");
+        String tapId = System.getProperty("tapId");
+
+        openURLWithMkabTap(mkabId,tapId);
 
         directionPurpose.click();
         dirPurCase1.click();
