@@ -56,7 +56,7 @@ class DirectionFulfillmentTest extends TestBase {
 
         buttonSave.click();
 
-        successMessage.exists();
+        successMessage.shouldHave(text("Направление успешно сохранено")); // не работает
 
     }
 }
