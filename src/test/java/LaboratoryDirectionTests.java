@@ -62,7 +62,9 @@ class LaboratoryDirectionTests extends TestBase {
             mkb.click();
             diagnosis.click();
             comment.setValue("test");
-            researchName.setValue("флюоро").pressEnter();
+            researchName.setValue("A06.09.006.001").pressEnter();
+            sleep(1000);
+
             researchFound.click();
             overlay.click();
             addResearchButton.click();
@@ -119,7 +121,9 @@ class LaboratoryDirectionTests extends TestBase {
             mkb.click();
             diagnosis.click();
             comment.setValue("deleted");
-            researchName.setValue("флюоро").pressEnter();
+            researchName.setValue("A06.09.006.001").pressEnter();
+            sleep(1000);
+
             researchFound.click();
             overlay.click();
             addResearchButton.click();

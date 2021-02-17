@@ -54,7 +54,7 @@ public class TestBase {
 
     //----Исследования-----------------------------------------------------------------------------------------------
     SelenideElement researchName = $(byAttribute("placeholder","Исследование")),
-                    researchFound = $(byAttribute("ng-reflect-message","A06.09.006 - Флюорография легк"));
+                    researchFound = $(By.xpath("(//div[@class='mat-checkbox-inner-container'])[3]"));
 
     //----Оверлей (служебный)----------------------------------------------------------------------------------------
     SelenideElement overlay = $(".cdk-overlay-container"),
