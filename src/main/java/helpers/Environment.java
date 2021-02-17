@@ -7,4 +7,8 @@ public class Environment {
     public static boolean
             isRemoteDriver = remoteDriverUrl != null,
             isVideoOn = videoStorageUrl != null;
+    public static String
+            mkabId = System.getProperty("mkaId"),
+            tapId = System.getProperty("tapId"),
+            docPrvdId = System.getProperty("docprvdId");
 }

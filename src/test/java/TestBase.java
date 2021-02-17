@@ -1,12 +1,15 @@
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.openqa.selenium.By;
 
 import static com.codeborne.selenide.Selectors.byAttribute;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static helpers.AttachmentsHelper.*;
@@ -16,6 +19,16 @@ import static helpers.Environment.isVideoOn;
 
 public class TestBase {
 //----Локаторы-------------------------------------------------------------------------------------------------------
+
+    //----Случай лечения---------------------------------------------------------------------------------------------
+    SelenideElement complaints = $(byText("Жалобы")),
+                    pickComplaints = $(By.xpath("//span[@class='complaintTag ng-star-inserted']")),
+                    addComplaints = $(By.xpath("//button[@class='btn-blue-square add-complaint']")),
+                    saveTapButton = $(By.xpath("(//button[text()=' Сохранить '])[2]")),
+                    snackbar = $(By.xpath(".//simple-snack-bar[@class='mat-simple-snackbar ng-star-inserted']/span")),
+                    createDirectionButton = $(byText("Создать")),
+                    directionType = $(By.xpath("(//div[@class='mat-select-value'])[2]")),
+                    pickLaboratoryType = $(By.xpath("(//mat-option[@class='mat-option ng-star-inserted']//span)[3]"));
 
     //----Контрол цели исследования----------------------------------------------------------------------------------
     SelenideElement directionPurpose = $(byAttribute("placeholder","Цель исследования")),
@@ -39,17 +52,16 @@ public class TestBase {
                     researchFound = $(byAttribute("ng-reflect-message","A06.09.006 - Флюорография легк"));
 
     //----Оверлей (служебный)----------------------------------------------------------------------------------------
-    SelenideElement overlay = $(".cdk-overlay-container");
+    SelenideElement overlay = $(".cdk-overlay-container"),
+                    body = $("body");
 
     //----Кнопки-----------------------------------------------------------------------------------------------------
-    SelenideElement buttonAdd = $(".btn-blue-square:not(.ng-star-inserted)"),
-                    buttonSave = $($x("//button[text()=' Сохранить ']"));
-
-    //----Кнопки-----------------------------------------------------------------------------------------------------
-    SelenideElement successMessage = $($x("//span[text()='Направление успешно сохранено']"));
+    SelenideElement addResearchButton = $(".btn-blue-square:not(.ng-star-inserted)"),
+                    saveDirectionButton = $($x("//button[text()=' Сохранить ']"));
 
 //-------------------------------------------------------------------------------------------------------------------
     @BeforeAll
+    @Step("Tests setup")
     public static void setUp() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
         configureSelenide();
@@ -61,6 +73,7 @@ public class TestBase {
     }
 
     @AfterEach
+    @Step("Attachments")
     public void afterEach(){
         String sessionId = getSessionId();
         attachScreenshot("Last screenshot");
@@ -70,15 +83,19 @@ public class TestBase {
         if (isVideoOn) attachVideo(sessionId);
     }
 
-    public void openURLWithMkabTap(String mkabID, String tapID) {
-        String ipAddress = "http://109.95.224.42:2165/",
-                relativePath = "test2/directions;",
-                mkabIdPart = "mkabId=" + mkabID + ";",
-                tapIdPart = "tapId=" + tapID + ";",
-                backUrl = "backUrl=%2Ftap%2Fcard%2F;menuName=Вернуться%20в%20ТАП;moduleName=Тап/Laboratory/new?",
-                ticket = "ticket=hSqZx4lN38o%2BhW7%2B92nmww4lbjTAuCEt96ZbaHdmJdqb%2BrEQR79h8tfX0fyVbK8VbzA2qIJxhnCDyI1Jt2BDhx8rkenU4HtA7EB6XXXRmpwUcDVupdn1o3gQT7Fa4V2qXC73gzg%2BIIZcfbdD%2BDiZphG8utN6Rmd6JkpCnzXqN0fAvwW9s7wzp60Lp7JBQtrcX4miN%2FwiEGyoIolfBncEmeWagyWCTbhIhXncHFlAdCuKJBK2Jzl3Go9NxXuy4uPeENKUzccPPqYtbflvU3FF06JRB3PX1y2i61v7PRQTl5U8fEl1pesEoYhgJywKd7LgZy2CDDnod1fGxM%2BFqwTFen6dB%2BM%3D&MkabId=2662334&TapId=2670514&DocPrvdId=347&MisUrl=http:%2F%2F192.168.7.54%2Fmis%2Ftest2&ReturnUrl=http:%2F%2F192.168.7.54%2Fmis%2Ftest2%2FSchedule&newStyle=1";
+    //----Собираем УРЛ белого случая лечения---------------------------------------------------------------------
+    public void openURLWithMkabTap(String mkabID, String tapID, String docPrvdId) {
 
-        open(ipAddress + relativePath + mkabIdPart + tapIdPart + backUrl + ticket);
+        String ipAddress = "http://109.95.224.42:2165/",
+                relativePath = "test2/tap/card",
+                ticket = "ticket=IhNpmO2lhSwbyJ1orHAD7qLggeE9S95511DXiMdsj3w5k220ljbVUxm0dip%2Bqupr7EaWXDIx%2BAIMTpb9cbtswnOPFJaPhIflTvaM2%2FYsk5CXrCvG6DgJpRgn4geoCNscGgSXZmR8J%2FcnGhMmxb3Z05OafJ51%2B2vDddXbjucEe9XjEw0PkUPz7pru5I7gM7vMz6lIbjDiV4g3fZiYD8EvODcDDANWXziHQjTrPhyhR0x64QC7d4iitOPGni%2Bg38kAvW6BGahH%2BVi9r6NUidg8rTxB36taAgHVFT01eAkjf%2BMbSFNOl%2BKT0CucPKjw%2BD6mJgbunKwaDvQiEXclRDrcMrkw9jc%3D",
+                mkabIdPart = "MkabId=" + mkabID,
+                tapIdPart = "TapId=" + tapID,
+                docPrvdIdPart = "DocPrvdId=" + docPrvdId,
+                misUrl = "MisUrl=http:%2F%2F192.168.7.54%2Fmis%2Ftest2",
+                returnUrl = "ReturnUrl=http:%2F%2F192.168.7.54%2Fmis%2Ftest2%2FSchedule";
+
+        open(ipAddress + relativePath + "?" + ticket+ "&" + mkabIdPart + "&" + tapIdPart + "&" + docPrvdIdPart + "&" + misUrl + "&" + returnUrl);
     }
 
 
