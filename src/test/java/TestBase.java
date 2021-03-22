@@ -22,6 +22,9 @@ import static io.qameta.allure.Allure.parameter;
 
 
 public class TestBase {
+
+    static String directionUrl;
+
 //----Локаторы-------------------------------------------------------------------------------------------------------
 
     //----Случай лечения---------------------------------------------------------------------------------------------
@@ -79,8 +82,8 @@ public class TestBase {
         //----Если настройка Jenkins пустая, то берем дефолтные значения + дебаг и тестирование-------------------------
         if (mkabId == null || tapId == null || docPrvdId == null) {
             mkabId = "2662334";
-            tapId = "2670620";
-            docPrvdId = "347";
+            tapId = "2670990";
+            docPrvdId = "2521";
         }
     }
 
@@ -100,7 +103,7 @@ public class TestBase {
 
         String ipAddress = "http://109.95.224.42:2165/", //"http://109.95.224.42:2165/",
                 relativePath = "test2/tap/card",
-                ticket = "ticket=IhNpmO2lhSwbyJ1orHAD7qLggeE9S95511DXiMdsj3w5k220ljbVUxm0dip%2Bqupr7EaWXDIx%2BAIMTpb9cbtswnOPFJaPhIflTvaM2%2FYsk5CXrCvG6DgJpRgn4geoCNscGgSXZmR8J%2FcnGhMmxb3Z05OafJ51%2B2vDddXbjucEe9XjEw0PkUPz7pru5I7gM7vMz6lIbjDiV4g3fZiYD8EvODcDDANWXziHQjTrPhyhR0x64QC7d4iitOPGni%2Bg38kAvW6BGahH%2BVi9r6NUidg8rTxB36taAgHVFT01eAkjf%2BMbSFNOl%2BKT0CucPKjw%2BD6mJgbunKwaDvQiEXclRDrcMrkw9jc%3D",
+                ticket = "ticket=D9VQnls2TN%2B2s%2FwzBNicUCtcrH1JNeDL6%2BRSxXP6jeJ%2FhYi6e%2FnGu13NyHHvOVBmmP%2BETKS%2FoKu%2FQraiIvDFoVWFUFZEhXMbiAauqiPVXFVP6vTnUOFTt49dWUKrLJu9qQ9jKZrXXXi%2Fv6VkaxQMVqcjfkV2ctNH5UXIdnUymK2FwDrwrUpwEtwKG9yrqvOnTwFM7NNxX%2BzH3lZd1sKNgRRnk1M4GqLT3uJFQ0Tkif%2BxaflrVRtMqRMen58nmCVjM%2FL0b4dFxdL7Yvlbyb5OvlP2qnf%2F5yfz9%2BfhQXSjiK5NMlmnYlwlEiae%2BhdLY2jxvxjjknDJwxIXxmrRvbt7jq1thpE%3D",
                 mkabIdPart = "MkabId=" + mkabID,
                 tapIdPart = "TapId=" + tapID,
                 docPrvdIdPart = "DocPrvdId=" + docPrvdId,
@@ -109,28 +112,6 @@ public class TestBase {
 
         open(ipAddress + relativePath + "?" + ticket+ "&" + mkabIdPart + "&" + tapIdPart + "&" + docPrvdIdPart + "&" + misUrl + "&" + returnUrl);
     }
-/*
-    public void getDirectionNumber(final String number) {
-        parameter("number", number);
-
-        String baseUrl = "http://109.95.224.42:2165/";
-        String baseUrlPath = "test2/paraclinic-api/api/v2/direction/";
-        String ticket = "IhNpmO2lhSwbyJ1orHAD7qLggeE9S95511DXiMdsj3w5k220ljbVUxm0dip+qupr7EaWXDIx+AIMTpb9cbtswnOPFJaPhIflTvaM2/Ysk5CXrCvG6DgJpRgn4geoCNscGgSXZmR8J/cnGhMmxb3Z05OafJ51+2vDddXbjucEe9XjEw0PkUPz7pru5I7gM7vMz6lIbjDiV4g3fZiYD8EvODcDDANWXziHQjTrPhyhR0x64QC7d4iitOPGni+g38kAvW6BGahH+Vi9r6NUidg8rTxB36taAgHVFT01eAkjf+MbSFNOl+KT0CucPKjw+D6mJgbunKwaDvQiEXclRDrcMrkw9jc=";
-
-        Issue issue = new Issue();
-        issue = (Issue) given()
-                .filter(new AllureRestAssured())
-                .header("Ticket", ticket)
-                .baseUrl(baseUrl)
-                .when()
-                .get(baseUrlPath + number)
-                .then()
-                .statusCode(200)
-                .body("number", equalTo(ISSUE_NUMBER))
-                .body("title", equalTo(ISSUE_TITLE))
-                .body("body",equalTo(ISSUE_TEXT));
-    }
-*/
 
 
 }
