@@ -2,13 +2,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
-import org.openqa.selenium.By;
 import org.junit.jupiter.api.Tag;
 
 import static com.codeborne.selenide.Condition.*;
 import static helpers.Environment.*;
+import static helpers.OpenUrl.*;
+import static pageObject.TapPageObjects.*;
 import static io.qameta.allure.Allure.step;
-import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -22,7 +22,8 @@ class LaboratoryDirectionTests extends TestBase {
     void fillDirectionForm() {
 
         step("Открываем случай лечения, заполняем жалобы, сохраняем ТАП.", () -> {
-            openURLWithMkabTap(mkabId, tapId, docPrvdId);
+
+            openTapCard();
             sleep(3000);
 
             complaints.click();
@@ -86,7 +87,7 @@ class LaboratoryDirectionTests extends TestBase {
 
         step("Удаление черновика из журнала направлений.", () -> {
 
-            openURLWithMkabTap(mkabId, tapId, docPrvdId);
+            openTapCard();
             sleep(3000);
 
             createDirectionButton.scrollIntoView(("{behavior: \"instant\", block: \"center\", inline: \"center\"}"));

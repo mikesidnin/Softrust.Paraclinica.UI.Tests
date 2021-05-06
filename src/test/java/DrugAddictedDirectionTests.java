@@ -9,7 +9,8 @@ import org.openqa.selenium.By;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static helpers.Environment.*;
+import static helpers.OpenUrl.*;
+import static pageObject.TapPageObjects.*;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,7 +24,7 @@ class DrugAddictedDirectionTests extends TestBase {
     void fillDirectionForm() {
 
         step("Открываем случай лечения, заполняем жалобы, сохраняем ТАП.", () -> {
-            openURLWithMkabTap(mkabId, tapId, docPrvdId);
+            openTapCard();
             sleep(3000);
 
             complaints.click();

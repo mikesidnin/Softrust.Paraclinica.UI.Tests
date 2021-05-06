@@ -8,6 +8,8 @@ public class Environment {
             isRemoteDriver = remoteDriverUrl != null,
             isVideoOn = videoStorageUrl != null;
     public static String
+            ipAdress = System.getProperty("ipAdress"),
+            namespace = System.getProperty("namespace"),
             mkabId = System.getProperty("mkaId"),
             tapId = System.getProperty("tapId"),
             docPrvdId = System.getProperty("docprvdId");
